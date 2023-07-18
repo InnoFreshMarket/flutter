@@ -106,7 +106,6 @@ class _StartPageState extends State<StartPage> {
 }
 
 Future<List<Item>> fetchData() async {
-  TokenApi.refreshTokens();
   var token = await TokenApi.getAccessToken();
   final response = await ServerApi()
       .get("/users/items", token)
