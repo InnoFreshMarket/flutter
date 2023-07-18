@@ -30,8 +30,8 @@ class AuthorizationManager {
             "Content-Type": "application/json"
           }).timeout(Duration(seconds: 3));
     } on DioError catch (e) {
-      if (e.response == null)
-        return AuthResult()..errorMessage = "Потеря соединения с сервером";
+      // if (e.response == null)
+      //   return AuthResult()..errorMessage = "Потеря соединения с сервером";
       if (e.response!.statusCode == 401) {
         return AuthResult()..errorMessage = "Неверный логин или пароль";
       }
@@ -74,8 +74,8 @@ class AuthorizationManager {
     } on DioError catch (e) {
       if (e.response == null) {
         print(e);
-        return AccountCreateResult()
-          ..errorMessage = "Потеряно соединение с сервером.";
+        // return AccountCreateResult()
+        //   ..errorMessage = "Потеряно соединение с сервером.";
       }
       if (e.response!.statusCode == 401 || e.response!.statusCode == 400) {
         return AccountCreateResult()
