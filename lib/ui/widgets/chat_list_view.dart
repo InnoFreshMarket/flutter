@@ -105,54 +105,51 @@ class ChatListViewState extends State<ChatListView>
   @override
   Widget build(BuildContext context) {
     return Column(
-          children: <Widget>[
-            FutureBuilder(
-                future: fetchId(),
-                builder: (context, id) {
-                  if (id.hasData) {
-                    return FutureBuilder(
-                        future: fetchData(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return ListView.builder(
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              itemCount: snapshot.data!.length,
-                              itemBuilder: (context, index) {
-                                if (snapshot.data![index]['user1'] ==
-                                    id.data!) {
-                                  return getItem(
-                                      context,
-                                      snapshot.data![index]["name1"],
-                                      snapshot.data![index]["id"],
-                                      snapshot.data![index]['user1']
-                                  );
-                                } else {
-                                  return getItem(
-                                      context,
-                                      snapshot.data![index]["name2"],
-                                      snapshot.data![index]["id"],
-                                      snapshot.data![index]['user2']
-                                  );
-                                }
-                              },
-                            );
-                          } else {
-                            return CircularProgressIndicator();
-                          }
-                        });
-                  } else {
-                    return CircularProgressIndicator();
-                  }
-                })
-            // ListView(
-            //   shrinkWrap: true,
-            //   children: <Widget>[
-            //     ChatListItemWidget(),
-            //   ],
-            // ),
-          ],
-        );
+      children: <Widget>[
+        FutureBuilder(
+            future: fetchId(),
+            builder: (context, id) {
+              if (id.hasData) {
+                return FutureBuilder(
+                    future: fetchData(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: (context, index) {
+                            if (snapshot.data![index]['user1'] == id.data!) {
+                              return getItem(
+                                  context,
+                                  snapshot.data![index]["name1"],
+                                  snapshot.data![index]["id"],
+                                  snapshot.data![index]['user1']);
+                            } else {
+                              return getItem(
+                                  context,
+                                  snapshot.data![index]["name2"],
+                                  snapshot.data![index]["id"],
+                                  snapshot.data![index]['user2']);
+                            }
+                          },
+                        );
+                      } else {
+                        return CircularProgressIndicator();
+                      }
+                    });
+              } else {
+                return CircularProgressIndicator();
+              }
+            })
+        // ListView(
+        //   shrinkWrap: true,
+        //   children: <Widget>[
+        //     ChatListItemWidget(),
+        //   ],
+        // ),
+      ],
+    );
   }
 
   @override

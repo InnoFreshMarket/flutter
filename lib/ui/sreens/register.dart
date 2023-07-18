@@ -75,7 +75,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 controller: _nameController,
                                 validator: (value) {
                                   if (value!.isEmpty || value.length < 2) {
-                                    return 'Пожалуйста, введите имя';
+                                  return 'Пожалуйста, введите имя';
                                   }
                                   return null;
                                 },
@@ -110,12 +110,13 @@ class _RegisterPageState extends State<RegisterPage> {
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'Пожалуйста, введите почту';
-                                  } else if (!RegExp(
-                                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                      .hasMatch(value)) {
-                                    return 'Пожалуйста, введите корректную почту';
-                                  }
-                                  return null;
+                                  } else
+                                    if (!RegExp(
+                                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                        .hasMatch(value)) {
+                                      return 'Пожалуйста, введите корректную почту';
+                                    }
+                                    return null;
                                 },
                                 decoration: InputDecoration(
                                   hintStyle: Theme.of(context)
@@ -148,12 +149,13 @@ class _RegisterPageState extends State<RegisterPage> {
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Пожалуйста, введите пароль';
-                              } else if (!RegExp(
-                                      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
-                                  .hasMatch(value)) {
-                                return 'Пароль должен быть не менее 8 символов, содержать цифры, заглавные и строчные буквы, а также спецсимволы';
-                              }
-                              return null;
+                              } else
+                                if (!RegExp(
+                                        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+                                    .hasMatch(value)) {
+                                  return 'Пароль должен быть не менее 8 символов, содержать цифры, заглавные и строчные буквы, а также спецсимволы';
+                                }
+                                return null;
                             },
                             onSaved: (newValue) =>
                                 _passwordController.text = newValue!,

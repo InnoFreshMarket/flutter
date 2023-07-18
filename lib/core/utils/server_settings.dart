@@ -1,3 +1,3 @@
 class ServerSettings {
-  static const baseUrl = "https://fspmainservice.onrender.com";
+  static const baseUrl = "https://innofarm-main.onrender.com";
 }

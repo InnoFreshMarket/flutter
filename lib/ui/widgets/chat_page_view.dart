@@ -10,12 +10,8 @@ class ChatPageView extends StatefulWidget {
   final int? chatId;
   final int? senderId;
 
-  ChatPageView({
-    Key? key,
-    this.username,
-    this.chatId,
-    this.senderId
-  }) : super(key: key);
+  ChatPageView({Key? key, this.username, this.chatId, this.senderId})
+      : super(key: key);
 
   @override
   _ChatPageViewState createState() => _ChatPageViewState();
@@ -113,64 +109,65 @@ class _ChatPageViewState extends State<ChatPageView> {
                   color: Colors.black54,
                 ),
                 Flexible(
-                  fit: FlexFit.tight,
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    // decoration: BoxDecoration(
-                    //   image: DecorationImage(
-                    //       // image: const AssetImage(
-                    //       //     "assets/images/chat-background-1.jpg"),
-                    //       fit: BoxFit.cover,
-                    //       colorFilter: Settings.isDarkMode
-                    //           ? ColorFilter.mode(
-                    //           Colors.grey[850], BlendMode.hardLight)
-                    //           : ColorFilter.linearToSrgbGamma()),
-                    // ),
-                    child: SingleChildScrollView(
-                        controller: _scrollController,
-                        // reverse: true,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            FutureBuilder(
-                              future: fetchData(widget.chatId!),
-                              builder: (context, snapshot) {
-                                    if (snapshot.hasData) {
-                                        return ListView.builder(
-                                          scrollDirection: Axis.vertical,
-                                          shrinkWrap: true,
-                                          itemCount: snapshot.data!.length,
-                                          itemBuilder: (context, index) {
-                                            if (snapshot.data![index]['sender'] == widget.senderId) {
-                                              return Align(
-                                                    alignment: Alignment(1, 0),
-                                                    child: SentMessageWidget(
-                                                      content: snapshot.data![index]['text'],
-                                                      isImage: false,
-                                                    )
-                                              );
-                                            } else {
-                                              return Align(
-                                                  alignment: Alignment(1, 0),
-                                                  child: ReceivedMessageWidget(
-                                                    content: snapshot.data![index]['text'],
-                                                    isImage: false,
-                                                  )
-                                              );
-                                            }
-                                          }
-                                        );
-                                    } else {
-                                      return CircularProgressIndicator();
-                                    }
-                              }
-                            )
-                            ]
-                        )
-                    )
-                  )
-                ),
+                    fit: FlexFit.tight,
+                    child: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        // decoration: BoxDecoration(
+                        //   image: DecorationImage(
+                        //       // image: const AssetImage(
+                        //       //     "assets/images/chat-background-1.jpg"),
+                        //       fit: BoxFit.cover,
+                        //       colorFilter: Settings.isDarkMode
+                        //           ? ColorFilter.mode(
+                        //           Colors.grey[850], BlendMode.hardLight)
+                        //           : ColorFilter.linearToSrgbGamma()),
+                        // ),
+                        child: SingleChildScrollView(
+                            controller: _scrollController,
+                            // reverse: true,
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  FutureBuilder(
+                                      future: fetchData(widget.chatId!),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.hasData) {
+                                          return ListView.builder(
+                                              scrollDirection: Axis.vertical,
+                                              shrinkWrap: true,
+                                              itemCount: snapshot.data!.length,
+                                              itemBuilder: (context, index) {
+                                                if (snapshot.data![index]
+                                                        ['sender'] ==
+                                                    widget.senderId) {
+                                                  return Align(
+                                                      alignment:
+                                                          Alignment(1, 0),
+                                                      child: SentMessageWidget(
+                                                        content: snapshot
+                                                                .data![index]
+                                                            ['text'],
+                                                        isImage: false,
+                                                      ));
+                                                } else {
+                                                  return Align(
+                                                      alignment:
+                                                          Alignment(1, 0),
+                                                      child:
+                                                          ReceivedMessageWidget(
+                                                        content: snapshot
+                                                                .data![index]
+                                                            ['text'],
+                                                        isImage: false,
+                                                      ));
+                                                }
+                                              });
+                                        } else {
+                                          return CircularProgressIndicator();
+                                        }
+                                      })
+                                ])))),
                 const Divider(height: 0, color: Colors.black26),
                 SizedBox(
                   height: 50,
@@ -216,20 +213,13 @@ class _ChatPageViewState extends State<ChatPageView> {
   }
 }
 
-
-
 Future<void> postMessage(String text, int chatId) async {
   await TokenApi.refreshTokens();
   var token = await TokenApi.getAccessToken();
-  final response = await ServerApi().post(
-      "/users/chat/$chatId/post_message",
-      token,
-      {'text': text}
-  );
+  final response = await ServerApi()
+      .post("/users/chat/$chatId/post_message", token, {'text': text});
   print(response);
 }
-
-
 
 Future<List<dynamic>> fetchData(int chatId) async {
   var token = await TokenApi.getAccessToken();

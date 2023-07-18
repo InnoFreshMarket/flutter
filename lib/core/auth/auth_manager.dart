@@ -25,14 +25,15 @@ class AuthorizationManager {
     Response? response;
     try {
       response = await _dio.post("${ServerSettings.baseUrl}/users/login/",
-          data: data, queryParameters: {"Content-Type": "application/json"}).timeout(Duration(seconds: 3));
+          data: data,
+          queryParameters: {
+            "Content-Type": "application/json"
+          }).timeout(Duration(seconds: 3));
     } on DioError catch (e) {
-      print(e);
       if (e.response == null)
         return AuthResult()..errorMessage = "Потеря соединения с сервером";
       if (e.response!.statusCode == 401) {
-        return AuthResult()
-          ..errorMessage = "Неверный логин или пароль";
+        return AuthResult()..errorMessage = "Неверный логин или пароль";
       }
     }
 
@@ -40,7 +41,9 @@ class AuthorizationManager {
     await TokenApi.setAccessToken(response.data["access"]);
     await TokenApi.saveName(email);
 
-    return AuthResult()..isAuthorized = true..type = response.data["role"];
+    return AuthResult()
+      ..isAuthorized = true
+      ..type = response.data["role"];
   }
 
   Future<bool> isAuthorized() async {
@@ -65,12 +68,15 @@ class AuthorizationManager {
     };
     Response? response;
     try {
-      response = await _dio.post("${ServerSettings.baseUrl}/users/register/",
-          data: data).timeout(Duration(seconds: 3));
+      response = await _dio
+          .post("${ServerSettings.baseUrl}/users/register/", data: data)
+          .timeout(Duration(seconds: 3));
     } on DioError catch (e) {
-      if (e.response == null)
+      if (e.response == null) {
+        print(e);
         return AccountCreateResult()
           ..errorMessage = "Потеряно соединение с сервером.";
+      }
       if (e.response!.statusCode == 401 || e.response!.statusCode == 400) {
         return AccountCreateResult()
           ..errorMessage = "Уже существует аккаунт с таким email";

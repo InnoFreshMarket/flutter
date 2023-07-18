@@ -4,7 +4,6 @@ import 'user.dart';
 part 'item.freezed.dart';
 part 'item.g.dart';
 
-
 // ['id', 'name', 'cost_retail', 'cost_wholesale',
 //           'date', 'farmer', 'number', 'number_wholesale',
 //           'description', 'expire_date', 'number_for_month',
@@ -17,13 +16,12 @@ class Item with _$Item {
     required String name,
     required double cost_retail,
     double? cost_wholesale,
-    DateTime? date,
-    int? farmer,
+    String? date,
+    required int farmer,
     required double number,
     double? number_wholesale,
     required String description,
-    
-    DateTime? expire_date,
+    String? expire_date,
     required bool subscriptable,
     double? number_for_month,
     required String category,
@@ -31,5 +29,4 @@ class Item with _$Item {
   }) = _Item;
 
   factory Item.fromJson(Map<String, Object?> json) => _$ItemFromJson(json);
-
 }

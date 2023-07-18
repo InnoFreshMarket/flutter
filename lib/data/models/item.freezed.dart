@@ -24,12 +24,12 @@ mixin _$Item {
   String get name => throw _privateConstructorUsedError;
   double get cost_retail => throw _privateConstructorUsedError;
   double? get cost_wholesale => throw _privateConstructorUsedError;
-  DateTime? get date => throw _privateConstructorUsedError;
-  int? get farmer => throw _privateConstructorUsedError;
+  String? get date => throw _privateConstructorUsedError;
+  int get farmer => throw _privateConstructorUsedError;
   double get number => throw _privateConstructorUsedError;
   double? get number_wholesale => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  DateTime? get expire_date => throw _privateConstructorUsedError;
+  String? get expire_date => throw _privateConstructorUsedError;
   bool get subscriptable => throw _privateConstructorUsedError;
   double? get number_for_month => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
@@ -50,12 +50,12 @@ abstract class $ItemCopyWith<$Res> {
       String name,
       double cost_retail,
       double? cost_wholesale,
-      DateTime? date,
-      int? farmer,
+      String? date,
+      int farmer,
       double number,
       double? number_wholesale,
       String description,
-      DateTime? expire_date,
+      String? expire_date,
       bool subscriptable,
       double? number_for_month,
       String category,
@@ -80,7 +80,7 @@ class _$ItemCopyWithImpl<$Res, $Val extends Item>
     Object? cost_retail = null,
     Object? cost_wholesale = freezed,
     Object? date = freezed,
-    Object? farmer = freezed,
+    Object? farmer = null,
     Object? number = null,
     Object? number_wholesale = freezed,
     Object? description = null,
@@ -110,11 +110,11 @@ class _$ItemCopyWithImpl<$Res, $Val extends Item>
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      farmer: freezed == farmer
+              as String?,
+      farmer: null == farmer
           ? _value.farmer
           : farmer // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
@@ -130,7 +130,7 @@ class _$ItemCopyWithImpl<$Res, $Val extends Item>
       expire_date: freezed == expire_date
           ? _value.expire_date
           : expire_date // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       subscriptable: null == subscriptable
           ? _value.subscriptable
           : subscriptable // ignore: cast_nullable_to_non_nullable
@@ -162,12 +162,12 @@ abstract class _$$_ItemCopyWith<$Res> implements $ItemCopyWith<$Res> {
       String name,
       double cost_retail,
       double? cost_wholesale,
-      DateTime? date,
-      int? farmer,
+      String? date,
+      int farmer,
       double number,
       double? number_wholesale,
       String description,
-      DateTime? expire_date,
+      String? expire_date,
       bool subscriptable,
       double? number_for_month,
       String category,
@@ -188,7 +188,7 @@ class __$$_ItemCopyWithImpl<$Res> extends _$ItemCopyWithImpl<$Res, _$_Item>
     Object? cost_retail = null,
     Object? cost_wholesale = freezed,
     Object? date = freezed,
-    Object? farmer = freezed,
+    Object? farmer = null,
     Object? number = null,
     Object? number_wholesale = freezed,
     Object? description = null,
@@ -218,11 +218,11 @@ class __$$_ItemCopyWithImpl<$Res> extends _$ItemCopyWithImpl<$Res, _$_Item>
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      farmer: freezed == farmer
+              as String?,
+      farmer: null == farmer
           ? _value.farmer
           : farmer // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
@@ -238,7 +238,7 @@ class __$$_ItemCopyWithImpl<$Res> extends _$ItemCopyWithImpl<$Res, _$_Item>
       expire_date: freezed == expire_date
           ? _value.expire_date
           : expire_date // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       subscriptable: null == subscriptable
           ? _value.subscriptable
           : subscriptable // ignore: cast_nullable_to_non_nullable
@@ -268,7 +268,7 @@ class _$_Item implements _Item {
       required this.cost_retail,
       this.cost_wholesale,
       this.date,
-      this.farmer,
+      required this.farmer,
       required this.number,
       this.number_wholesale,
       required this.description,
@@ -289,9 +289,9 @@ class _$_Item implements _Item {
   @override
   final double? cost_wholesale;
   @override
-  final DateTime? date;
+  final String? date;
   @override
-  final int? farmer;
+  final int farmer;
   @override
   final double number;
   @override
@@ -299,7 +299,7 @@ class _$_Item implements _Item {
   @override
   final String description;
   @override
-  final DateTime? expire_date;
+  final String? expire_date;
   @override
   final bool subscriptable;
   @override
@@ -382,12 +382,12 @@ abstract class _Item implements Item {
       required final String name,
       required final double cost_retail,
       final double? cost_wholesale,
-      final DateTime? date,
-      final int? farmer,
+      final String? date,
+      required final int farmer,
       required final double number,
       final double? number_wholesale,
       required final String description,
-      final DateTime? expire_date,
+      final String? expire_date,
       required final bool subscriptable,
       final double? number_for_month,
       required final String category,
@@ -404,9 +404,9 @@ abstract class _Item implements Item {
   @override
   double? get cost_wholesale;
   @override
-  DateTime? get date;
+  String? get date;
   @override
-  int? get farmer;
+  int get farmer;
   @override
   double get number;
   @override
@@ -414,7 +414,7 @@ abstract class _Item implements Item {
   @override
   String get description;
   @override
-  DateTime? get expire_date;
+  String? get expire_date;
   @override
   bool get subscriptable;
   @override

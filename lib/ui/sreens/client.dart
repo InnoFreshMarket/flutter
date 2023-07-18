@@ -2,38 +2,69 @@ import 'dart:convert';
 
 import 'package:fermer/core/auth/server_api.dart';
 import 'package:fermer/core/utils/token_api.dart';
+import 'package:fermer/data/models/item.dart';
 import 'package:fermer/ui/kit/colors.dart';
-import 'package:fermer/ui/widgets/add_item.dart';
 import 'package:fermer/ui/widgets/app_bar.dart';
+import 'package:fermer/ui/widgets/chat_list_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_launcher_icons/main.dart';
 
-import '../../data/models/item.dart';
 import '../widgets/listView.dart';
 
-class FermerPage extends StatefulWidget {
-  const FermerPage({super.key});
+class StartPage extends StatefulWidget {
+  const StartPage({super.key});
 
   @override
-  State<FermerPage> createState() => _FermerPageState();
+  State<StartPage> createState() => _StartPageState();
 }
 
-class _FermerPageState extends State<FermerPage> {
+class _StartPageState extends State<StartPage> {
+  late Map<Item, int> cart;
+  List<Item> fruits = [];
+  List<Item> vegetables = [];
+  List<Item> other = [];
+
+  @override
+  void initState() {
+    cart = {};
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
+        drawer: const Drawer(
+          child: Column(
+            children: <Widget>[
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Text(
+                  'Sidebar',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: ChatListView(),
+              ),
+            ],
+          ),
+        ),
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
+          child: Icon(Icons.chat),
           backgroundColor: CustomColors.deepGreen,
-          onPressed: () => showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return SellProductDialog();
-              }),
+          // onPressed: () => Navigator.pushNamed(context, "/chats")
+          onPressed: () => Scaffold.of(context).openDrawer(),
         ),
         resizeToAvoidBottomInset: false,
         appBar: CustomAppBar(),
         body: SafeArea(
-            child: SafeArea(
             child: Column(children: [
           Column(children: [
             SizedBox(
@@ -70,7 +101,7 @@ class _FermerPageState extends State<FermerPage> {
                         return CircularProgressIndicator();
                     }))
           ])
-        ]))));
+        ])));
   }
 }
 

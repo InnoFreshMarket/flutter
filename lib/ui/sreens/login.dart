@@ -70,10 +70,10 @@ class _LoginPageState extends State<LoginPage> {
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'Пожалуйста, введите почту';
-                                  } else if (!RegExp(
-                                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                      .hasMatch(value)) {
-                                    return 'Пожалуйста, введите корректную почту';
+                                    } else if (!RegExp(
+                                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                        .hasMatch(value)) {
+                                      return 'Пожалуйста, введите корректную почту';
                                   }
                                   return null;
                                 },
@@ -108,7 +108,8 @@ class _LoginPageState extends State<LoginPage> {
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Пожалуйста, введите пароль';
-                              } else if (!RegExp(
+                              }
+                              else if (!RegExp(
                                       r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
                                   .hasMatch(value)) {
                                 return 'Пароль должен быть не менее 8 символов, содержать цифры, заглавные и строчные буквы, а также спецсимволы';
@@ -155,18 +156,21 @@ class _LoginPageState extends State<LoginPage> {
                                 .authorize(_mailController.text,
                                     _passwordController.text);
                             if (response.isAuthorized == true) {
-                              if (response.type=="BY"){
+                              if (response.type == "BY") {
                                 Navigator.pushNamed(context, '/');
-                              }
-                              else if (response.type=="FM"){
+                              } else if (response.type == "FM") {
                                 Navigator.pushNamed(context, '/fermer');
                               }
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   backgroundColor: CustomColors.deepGreen,
-                                  content:
-                                      Text(response.errorMessage ?? 'Ошибка', style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.white)),
+                                  content: Text(
+                                      response.errorMessage ?? 'Ошибка',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displaySmall!
+                                          .copyWith(color: Colors.white)),
                                   duration: const Duration(seconds: 3),
                                 ),
                               );

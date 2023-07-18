@@ -24,10 +24,11 @@ class TokenApi {
 
   static refreshTokens() async {
     var response = await _dio.post("${ServerSettings.baseUrl}/users/refresh/",
-        data: {"refresh": await TokenApi.getRefreshToken()}).timeout(Duration(seconds: 3));
+        data: {
+          "refresh": await TokenApi.getRefreshToken()
+        }).timeout(Duration(seconds: 3));
 
-    
-    if (response.statusCode != 200 || response.statusCode!=201) return;
+    if (response.statusCode != 200 || response.statusCode != 201) return;
 
     await TokenApi.setAccessToken(response.data["access"]);
     await TokenApi.setRefreshToken(response.data["refresh"]);

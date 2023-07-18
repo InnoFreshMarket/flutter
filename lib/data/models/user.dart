@@ -9,13 +9,14 @@ enum UserType { FM, BY, AD }
 @freezed
 class User with _$User {
   const factory User({
-    required int id,
+    int? id,
     required String name,
     required UserType role,
     String? address,
-    required String phone,
-    required String email,
-    required String password,
+    String? phone_number,
+    String? email,
+    String? password,
+    required double rate,
     Card? card,
   }) = _User;
 

@@ -18,9 +18,7 @@ class ServerApi {
     var fullUrl = "$_baseUrl$relativeUrl";
     var response = await _dio.request(fullUrl,
         options: Options(
-          method: "POST",
-          headers: {"Authorization": "Bearer $accessToken"}
-        ),
+            method: "POST", headers: {"Authorization": "Bearer $accessToken"}),
         data: data);
     return response;
   }
@@ -55,7 +53,6 @@ class ServerApi {
     var response;
     try {
       response = await get("/users/getId/", access);
-      print(response);
     } catch (e) {
       print(e.toString());
     }
